@@ -1,35 +1,47 @@
-import React from 'react';
-import BookThumbnail from './BookThumbnail';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { Grid, Typography, Card, CardContent, CardMedia } from '@mui/material';
 
 const BookViewPage = () => {
-  // Sample book data
-  const books = [
-    {
-      title: 'Book 1',
-      genre: 'Fiction',
-      author: 'Author 1',
-    },
-    {
-      title: 'Book 2',
-      genre: 'Mystery',
-      author: 'Author 2',
-    },
-   
-  ];
+  const [books, setBooks] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get('http://localhost:5000/api/books')
+      .then((response) => setBooks(response.data))
+      .catch((error) => console.error('Error fetching products:', error));
+  }, []);
 
   return (
-    <div>
-      <h2>Book View Page</h2>
-      <div className="thumbnail-container">
-        {books.map((book, index) => (
-          <BookThumbnail
-            key={index}
-            title={book.title}
-            genre={book.genre}
-            author={book.author}
-          />
+    <div style={{ padding: '20px' }}>
+      <Grid container spacing={2}>
+        {books.map((book) => (
+          <Grid item xs={12} sm={6} md={4} key={book._id}>
+            <Card>
+              <CardMedia
+                component="img"
+                height="200"
+                image={book.thumbnail}
+                alt={book.title}
+              />
+              <CardContent>
+                <Typography variant="h6" gutterBottom>
+                  {book.title}
+                </Typography>
+                <Typography variant="body1" color="textSecondary">
+                  Category: {book.genre}
+                </Typography>
+                <Typography variant="body1" color="textSecondary">
+                  ISBN: {book.ISBN}
+                </Typography>
+                <Typography variant="body1" color="textSecondary">
+                  Author: {book.author}
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
         ))}
-      </div>
+      </Grid>
     </div>
   );
 };
