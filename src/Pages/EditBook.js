@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { TextField, Button } from '@material-ui/core';
+import axios from 'axios';
 
 const EditBook = ({ book, onEditBook }) => {
   const [title, setTitle] = useState('');
@@ -11,14 +12,15 @@ const EditBook = ({ book, onEditBook }) => {
 
   useEffect(() => {
     if (book) {
-      setTitle(book.title);
-      setGenre(book.genre);
-      setAuthor(book.author);
-      setISBN(book.isbn);
-      setBookCover(book.bookCover);
-      setAvailability(book.availability);
+      setTitle(book.title || '');
+      setGenre(book.genre || '');
+      setAuthor(book.author || '');
+      setISBN(book.isbn || '');
+      setBookCover(book.bookCover || '');
+      setAvailability(book.availability || false);
     }
   }, [book]);
+  
 
   const handleEditBook = () => {
     const updatedBook = {
@@ -30,7 +32,15 @@ const EditBook = ({ book, onEditBook }) => {
       bookCover,
       availability,
     };
-    onEditBook(updatedBook);
+
+    axios
+      .put(`/api/books/${book._id}`, updatedBook)
+      .then((response) => {
+        onEditBook(response.data);
+      })
+      .catch((error) => {
+        console.error('Error updating book:', error);
+      });
   };
 
   return (
@@ -74,5 +84,3 @@ const EditBook = ({ book, onEditBook }) => {
 };
 
 export default EditBook;
-
-

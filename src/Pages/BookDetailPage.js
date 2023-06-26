@@ -1,15 +1,9 @@
-import React from 'react';
+import React from 'react'
 
-const BookDetailPage = ({ title, genre, author, isbn, availability }) => {
+const BookDetailPage = () => {
   return (
-    <div>
-      <h2>{title}</h2>
-      <p>Genre: {genre}</p>
-      <p>Author: {author}</p>
-      <p>ISBN: {isbn}</p>
-      <p>Availability: {availability ? 'Available' : 'Not available'}</p>
-    </div>
-  );
-};
+    <div>BookDetailPage</div>
+  )
+}
 
-export default BookDetailPage;
+export default BookDetailPage

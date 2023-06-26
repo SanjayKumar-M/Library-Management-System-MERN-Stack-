@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import '../Styles/addbook.css'
+import '../Styles/addbook.css';
+
 const AddBook = () => {
   const [title, setTitle] = useState('');
   const [genre, setGenre] = useState('');
@@ -38,7 +39,7 @@ const AddBook = () => {
 
   return (
     <div>
-      <h2>Add a New Book</h2>
+     
       <form onSubmit={handleSubmit} className="add-book-form">
         <div className="form-group">
           <label>Title:</label>
@@ -100,4 +101,5 @@ const AddBook = () => {
 };
 
 export default AddBook;
+
 
