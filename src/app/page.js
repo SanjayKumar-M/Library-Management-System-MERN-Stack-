@@ -1,8 +1,21 @@
+"use client"
 import React from 'react'
+import { useSocket } from '@/context/Socketclient'
+import { useEffect } from 'react'
+import { Socketclient } from '@/context/Socketclient'
 
-const Home= () => {
+
+function Home(){
+  const socket = useSocket();
+  useEffect(()=>{
+    socket?.on("connect",()=>{
+      console.log(socket.id)
+    }) 
+  },[socket])
+  
   return (
-    <div>page</div>
+    <Socketclient>Hello</Socketclient>
+    
   )
 }
 
