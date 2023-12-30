@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { useSocket } from '@/context/Socketclient';
 import { Socketclient } from '@/context/Socketclient';
 import usePeer from '../hooks/usePeer';
+import Lobby from './Lobby/page';
 
 function Home() {
   const socket = useSocket();
@@ -15,7 +16,11 @@ function Home() {
     });
   }, [socket]);
 
-  return <div>Hello</div>;
+  return (
+  <div>
+    <Lobby />
+  </div>)
+  ;
 }
 
 export default function HomePage() {
