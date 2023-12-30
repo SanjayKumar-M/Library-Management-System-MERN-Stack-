@@ -1,6 +1,6 @@
 import React from 'react'
-import { useSocket } from './context/Socketclient'
-import usePeer from './app/hooks/usePeer';
+import { useSocket } from '../context/Socketclient'
+import usePeer from '../hooks/usePeer';
 
 const Room = () => {
     const socket = useSocket();

@@ -3,7 +3,7 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useSocket } from '@/context/Socketclient';
 import { Socketclient } from '@/context/Socketclient';
-import usePeer from './hooks/usePeer';
+import usePeer from '../hooks/usePeer';
 
 function Home() {
   const socket = useSocket();
