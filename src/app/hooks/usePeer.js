@@ -17,6 +17,10 @@ const usePeer = () =>{
             setmyId(id);
         })()
     },[])
+
+    return {
+        peer, myId
+    }
 }
 
 export default usePeer;
