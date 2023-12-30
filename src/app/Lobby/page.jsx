@@ -11,11 +11,11 @@ const Lobby = () => {
             <div className='flex items-center justify-center flex-col mt-80'>
 
 
-                <input />
-                <button> Join Meet</button>
+                <input className='border-black' />
+                <button className='bg-black text-white p-3 pl-11 pr-11 rounded-full'> Join Meet</button>
                 <p>OR</p>
 
-                <button>Create New Meet</button>
+                <button className='bg-black text-white p-3 pl-3 rounded-full'>Create New Meet</button>
             </div>
         </>
     )
