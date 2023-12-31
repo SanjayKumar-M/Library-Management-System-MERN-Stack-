@@ -8,8 +8,10 @@ const useMediaStream = () =>{
                 audio:true,
                 video:true
             })
+            console.log("setting your stream");
+            setState(stream)
         })
-    })
+    },[])
 }
 
 export default useMediaStream;
