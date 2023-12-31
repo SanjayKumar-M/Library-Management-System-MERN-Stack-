@@ -1,10 +1,13 @@
 import ReactPlayer from 'react-player'
 
-import React from 'react'
 
-const Player = () => {
+const Player = (props) => {
+
+    const {playerId, url, muted, playing} = props;
   return (
-    <div>Player</div>
+    <div>
+        <ReactPlayer key={playerId} url={url} muted={muted} playing={playing}/>
+    </div>
   )
 }
 
