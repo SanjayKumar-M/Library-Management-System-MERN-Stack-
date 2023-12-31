@@ -10,7 +10,7 @@ const Room = () => {
     const {stream} = useMediaStream();
   return (
     <div>
-      
+      <Player  url={stream} muted playing />
     </div>
   )
 }
