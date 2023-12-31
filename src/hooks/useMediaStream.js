@@ -1,7 +1,9 @@
-import { useState ,useEffect} from "react";
+import { useState ,useEffect, useRef} from "react";
 const useMediaStream = () =>{
 
     const [state,setState] = useState(null);
+
+    const isStreamSet = useRef(false);
     useEffect(()=>{
         (async function initStream(){
             try{
@@ -17,6 +19,9 @@ const useMediaStream = () =>{
         }
         })
     },[])
+    return{
+        stream:state
+    }
 }
 
 export default useMediaStream;
