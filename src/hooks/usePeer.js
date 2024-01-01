@@ -1,30 +1,34 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from 'react';
+import { useSocket } from '@/context/Socketclient';
+import { useRouter } from 'next/navigation';
 
-import { useSocket } from "@/context/Socketclient";
-import { useRouter } from "next/router";
-
-const usePeer = () =>{
-    const socket = useSocket()
-    const roomId = useRouter.query.roomId;
+const usePeer = () => {
+    const router = useRouter();
+    const socket = useSocket();
     const [peer, setPeer] = useState(null);
-    const [myId, setmyId] = useState('')
+    const [myId, setMyId] = useState('');
     const isPeerSet = useRef(false);
-    useEffect(()=>{
-        if(isPeerSet.current || !roomId || !socket) return;
-        isPeerSet.current = true;
-        (async function initPeer(){
-            const myPeer = new (await import('peerjs')).default()
-            setPeer(myPeer)
 
-            myPeer.on('open',(id)=>{console.log(`our peer id is ${id}`)})
-            setmyId(id);
-            socket?.emit('join room', roomId, id)
-        })()
-    })
+    useEffect(() => {
+        if (!router || !router.query || isPeerSet.current || !router.query.roomId || !socket) return;
+        isPeerSet.current = true;
+
+        (async function initPeer() {
+            const myPeer = new (await import('peerjs')).default();
+            setPeer(myPeer);
+
+            myPeer.on('open', (id) => {
+                console.log(`our peer id is ${id}`);
+                setMyId(id);
+                socket?.emit('join room', router.query.roomId, id);
+            });
+        })();
+    }, [router, socket]);
 
     return {
-        peer, myId
-    }
-}
+        peer,
+        myId,
+    };
+};
 
 export default usePeer;
